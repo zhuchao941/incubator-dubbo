@@ -150,7 +150,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo-dependencies-bom</artifactId>
-                <version>wireless-2.6.5</version>
+                <version>2.6.5-wireless</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -606,4 +606,17 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>Releases</id>
+            <name>Local Nexus Repository</name>
+            <url>http://192.168.1.177:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>Snapshots</id>
+            <name>Local Nexus Repository</name>
+            <url>http://192.168.1.177:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

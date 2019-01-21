@@ -306,4 +306,16 @@
         </profile>
     </profiles>
 
+    <distributionManagement>
+        <repository>
+            <id>Releases</id>
+            <name>Local Nexus Repository</name>
+            <url>http://192.168.1.177:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>Snapshots</id>
+            <name>Local Nexus Repository</name>
+            <url>http://192.168.1.177:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
