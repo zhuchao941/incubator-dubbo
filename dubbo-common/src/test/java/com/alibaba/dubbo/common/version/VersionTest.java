@@ -34,5 +34,6 @@ public class VersionTest {
         Assert.assertTrue(Version.isSupportResponseAttatchment("2.0.2"));
         Assert.assertTrue(Version.isSupportResponseAttatchment("2.0.3"));
         Assert.assertFalse(Version.isSupportResponseAttatchment("2.0.0"));
+        Assert.assertFalse(Version.isSupportResponseAttatchment("2.5.6.2-D-RELEASE"));
     }
 }

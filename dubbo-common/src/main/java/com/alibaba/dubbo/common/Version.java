@@ -19,6 +19,7 @@ package com.alibaba.dubbo.common;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.ClassHelper;
+import com.alibaba.dubbo.common.utils.StringUtils;
 
 import java.net.URL;
 import java.security.CodeSource;
@@ -41,9 +42,10 @@ public final class Version {
 
     /**
      * For protocol compatibility purpose.
-     * Because {@link #isSupportResponseAttatchment} is checked for every call, int compare expect to has higher performance than string.
+     * Because {@link #isSupportResponseAttatchment} is checked for every call, int compare expect to has higher
+     * performance than string.
      */
-    private static final int LOWEST_VERSION_FOR_RESPONSE_ATTATCHMENT = 20002; // 2.0.2
+    private static final int LOWEST_VERSION_FOR_RESPONSE_ATTACHMENT = 2000200; // 2.0.2
     private static final Map<String, Integer> VERSION2INT = new HashMap<String, Integer>();
 
     static {
@@ -66,19 +68,24 @@ public final class Version {
         if (version == null || version.length() == 0) {
             return false;
         }
-        // for previous dubbo version(2.0.10/020010~2.6.2/020602), this version is the jar's version, so they need to be ignore
+        // for previous dubbo version(2.0.10/020010~2.6.2/020602), this version is the jar's version, so they need to
+        // be ignore
         int iVersion = getIntVersion(version);
-        if (iVersion >= 20010 && iVersion <= 20602) {
+        if (iVersion >= 2001000 && iVersion <= 2060200) {
             return false;
         }
 
-        return iVersion >= LOWEST_VERSION_FOR_RESPONSE_ATTATCHMENT;
+        return iVersion >= LOWEST_VERSION_FOR_RESPONSE_ATTACHMENT;
     }
 
     public static int getIntVersion(String version) {
         Integer v = VERSION2INT.get(version);
         if (v == null) {
             v = parseInt(version);
+            // e.g., version number 2.6.3 will convert to 2060300
+            if (version.split("\\.").length == 3) {
+                v = v * 100;
+            }
             VERSION2INT.put(version, v);
         }
         return v;
@@ -104,7 +111,6 @@ public final class Version {
                 } else {
                     index = i;
                 }
-                continue;
             } else {
                 index = i;
                 break;
